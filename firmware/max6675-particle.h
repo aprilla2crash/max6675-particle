@@ -1,11 +1,9 @@
 // this library is public domain. enjoy!
 // www.ladyada.net/learn/sensors/thermocouple
 
-#if ARDUINO >= 100
- #include "Arduino.h"
-#else
- #include "WProgram.h"
-#endif
+
+#include "Arduino.h"
+
 
 class MAX6675 {
  public:
