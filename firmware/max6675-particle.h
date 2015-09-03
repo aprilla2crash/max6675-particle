@@ -2,7 +2,6 @@
 // www.ladyada.net/learn/sensors/thermocouple
 
 
-#include "Arduino.h"
 
 
 class MAX6675 {
