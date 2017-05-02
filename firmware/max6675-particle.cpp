@@ -1,15 +1,15 @@
 // this library is public domain. enjoy!
 // www.ladyada.net/learn/sensors/thermocouple
 
-#include <avr/pgmspace.h>
-#include <util/delay.h>
-#include <stdlib.h>
+#include "application.h"
+#include "avr/pgmspace.h"
+#include "stdlib.h"
 #include "max6675-particle.h"
 
-MAX6675::MAX6675(int8_t SCLK, int8_t CS, int8_t MISO) {
+MAX6675::MAX6675(int8_t SCLK, int8_t CS, int8_t MISO1) {
   sclk = SCLK;
   cs = CS;
-  miso = MISO;
+  miso = MISO1;
 
   //define pin modes
   pinMode(cs, OUTPUT);
@@ -23,7 +23,7 @@ double MAX6675::readCelsius(void) {
   uint16_t v;
 
   digitalWrite(cs, LOW);
-  _delay_ms(1);
+  delayMicroseconds(1);
 
   v = spiread();
   v <<= 8;
@@ -53,14 +53,14 @@ byte MAX6675::spiread(void) {
   for (i=7; i>=0; i--)
   {
     digitalWrite(sclk, LOW);
-    _delay_ms(1);
+    delayMicroseconds(1);
     if (digitalRead(miso)) {
       //set the bit to 0 no matter what
       d |= (1 << i);
     }
 
     digitalWrite(sclk, HIGH);
-    _delay_ms(1);
+    delayMicroseconds(1);
   }
 
   return d;
